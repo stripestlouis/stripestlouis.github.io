@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stripe STL — Quote Generator</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f4f4f4; color: #1a1a1a; }
+
+    header {
+      background: #1a1a1a;
+      color: #FFD700;
+      padding: 16px 20px;
+      font-size: 1.3rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+    header span { color: #fff; }
+
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+
+    h2 { font-size: 1.1rem; margin-bottom: 16px; color: #333; }
+
+    .card {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+
+    label { display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 4px; color: #555; }
+    input, textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 6px;
+      font-size: 1rem;
+      margin-bottom: 14px;
+      transition: border-color 0.2s;
+    }
+    input:focus, textarea:focus { outline: none; border-color: #FFD700; }
+    textarea { height: 60px; resize: vertical; }
+
+    .line-item {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .line-item label { margin: 0; font-size: 0.9rem; font-weight: 600; }
+    .line-item input {
+      width: 70px;
+      text-align: center;
+      margin: 0;
+      padding: 8px;
+    }
+    .line-item .subtotal {
+      width: 80px;
+      text-align: right;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #1a1a1a;
+    }
+
+    .section-title {
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #aaa;
+      margin-bottom: 12px;
+    }
+
+    .total-bar {
+      background: #1a1a1a;
+      color: white;
+      padding: 16px 20px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .total-bar .label { font-size: 0.9rem; color: #aaa; }
+    .total-bar .amount { font-size: 1.8rem; font-weight: 900; color: #FFD700; }
+    .deposit { font-size: 0.85rem; color: #aaa; margin-top: 4px; }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 800;
+      cursor: pointer;
+      margin-bottom: 10px;
+      transition: opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.9; }
+    .btn-primary { background: #FFD700; color: #1a1a1a; }
+    .btn-secondary { background: #1a1a1a; color: #FFD700; }
+
+    /* QUOTE OUTPUT */
+    #quoteOutput {
+      display: none;
+      background: white;
+      border-radius: 8px;
+      padding: 24px;
+      margin-top: 16px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      white-space: pre-wrap;
+      font-size: 0.9rem;
+      line-height: 1.7;
+      font-family: monospace;
+      color: #1a1a1a;
+    }
+
+    .copy-btn {
+      display: none;
+      width: 100%;
+      margin-top: 10px;
+      padding: 14px;
+      background: #28a745;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<header>STRIPE<span>STL</span> &nbsp;— Quote Generator</header>
+
+<div class="container">
+
+  <!-- CUSTOMER INFO -->
+  <div class="card">
+    <div class="section-title">Customer Info</div>
+    <label>Business Name</label>
+    <input type="text" id="bizName" placeholder="e.g. Tony's Pizza"/>
+    <label>Contact Name</label>
+    <input type="text" id="contactName" placeholder="e.g. Tony Marino"/>
+    <label>Address</label>
+    <input type="text" id="address" placeholder="123 Main St, St. Louis, MO"/>
+    <label>Phone / Email</label>
+    <input type="text" id="contactInfo" placeholder="e.g. 314-555-0000"/>
+    <label>Notes (optional)</label>
+    <textarea id="notes" placeholder="e.g. Re-stripe existing layout, no new stalls"></textarea>
+  </div>
+
+  <!-- LINE ITEMS -->
+  <div class="card">
+    <div class="section-title">Job Details</div>
+
+    <div class="line-item">
+      <label>Standard Stalls</label>
+      <input type="number" id="q_stalls" min="0" value="0" oninput="calc()"/>
+      <div class="subtotal" id="s_stalls">$0</div>
+    </div>
+
+    <div class="line-item">
+      <label>Handicap Stalls</label>
+      <input type="number" id="q_hc_stalls" min="0" value="0" oninput="calc()"/>
+      <div class="subtotal" id="s_hc_stalls">$0</div>
+    </div>
+
+    <div class="line-item">
+      <label>Handicap Symbols</label>
+      <input type="number" id="q_hc_symbol" min="0" value="0" oninput="calc()"/>
+      <div class="subtotal" id="s_hc_symbol">$0</div>
+    </div>
+
+    <div class="line-item">
+      <label>Directional Arrows</label>
+      <input type="number" id="q_arrows" min="0" value="0" oninput="calc()"/>
+      <div class="subtotal" id="s_arrows">$0</div>
+    </div>
+
+    <div class="line-item">
+      <label>Stop Bars</label>
+      <input type="number" id="q_stop" min="0" value="0" oninput="calc()"/>
+      <div class="subtotal" id="s_stop">$0</div>
+    </div>
+
+    <div class="line-item">
+      <label>Fire Lane (linear ft)</label>
+      <input type="number" id="q_fire" min="0" value="0" oninput="calc()"/>
+      <div class="subtotal" id="s_fire">$0</div>
+    </div>
+  </div>
+
+  <!-- TOTAL -->
+  <div class="total-bar">
+    <div>
+      <div class="label">Total Quote</div>
+      <div class="deposit" id="depositAmt">50% deposit: $0</div>
+    </div>
+    <div class="amount" id="totalAmt">$0</div>
+  </div>
+
+  <button class="btn btn-primary" onclick="generateQuote()">📋 Generate Quote Text</button>
+  <button class="btn btn-secondary" onclick="resetForm()">🔄 Reset</button>
+
+  <div id="quoteOutput"></div>
+  <button class="copy-btn" id="copyBtn" onclick="copyQuote()">📋 Copy to Clipboard</button>
+
+</div>
+
+<script>
+  const rates = {
+    stalls: 10,
+    hc_stalls: 30,
+    hc_symbol: 25,
+    arrows: 18,
+    stop: 18,
+    fire: 1.50
+  };
+
+  function calc() {
+    const stalls = +document.getElementById('q_stalls').value || 0;
+    const hc_stalls = +document.getElementById('q_hc_stalls').value || 0;
+    const hc_symbol = +document.getElementById('q_hc_symbol').value || 0;
+    const arrows = +document.getElementById('q_arrows').value || 0;
+    const stop = +document.getElementById('q_stop').value || 0;
+    const fire = +document.getElementById('q_fire').value || 0;
+
+    const s_stalls = stalls * rates.stalls;
+    const s_hc_stalls = hc_stalls * rates.hc_stalls;
+    const s_hc_symbol = hc_symbol * rates.hc_symbol;
+    const s_arrows = arrows * rates.arrows;
+    const s_stop = stop * rates.stop;
+    const s_fire = fire * rates.fire;
+
+    document.getElementById('s_stalls').textContent = '$' + s_stalls;
+    document.getElementById('s_hc_stalls').textContent = '$' + s_hc_stalls;
+    document.getElementById('s_hc_symbol').textContent = '$' + s_hc_symbol;
+    document.getElementById('s_arrows').textContent = '$' + s_arrows;
+    document.getElementById('s_stop').textContent = '$' + s_stop;
+    document.getElementById('s_fire').textContent = '$' + s_fire.toFixed(2);
+
+    const total = s_stalls + s_hc_stalls + s_hc_symbol + s_arrows + s_stop + s_fire;
+    const deposit = total * 0.5;
+
+    document.getElementById('totalAmt').textContent = '$' + total.toFixed(2);
+    document.getElementById('depositAmt').textContent = '50% deposit: $' + deposit.toFixed(2);
+  }
+
+  function generateQuote() {
+    const bizName = document.getElementById('bizName').value || 'Your Business';
+    const contactName = document.getElementById('contactName').value || '';
+    const address = document.getElementById('address').value || '';
+    const contactInfo = document.getElementById('contactInfo').value || '';
+    const notes = document.getElementById('notes').value || '';
+
+    const stalls = +document.getElementById('q_stalls').value || 0;
+    const hc_stalls = +document.getElementById('q_hc_stalls').value || 0;
+    const hc_symbol = +document.getElementById('q_hc_symbol').value || 0;
+    const arrows = +document.getElementById('q_arrows').value || 0;
+    const stop = +document.getElementById('q_stop').value || 0;
+    const fire = +document.getElementById('q_fire').value || 0;
+
+    const total = (stalls * rates.stalls) + (hc_stalls * rates.hc_stalls) +
+                  (hc_symbol * rates.hc_symbol) + (arrows * rates.arrows) +
+                  (stop * rates.stop) + (fire * rates.fire);
+    const deposit = total * 0.5;
+
+    const today = new Date().toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
+
+    let lines = [];
+    if (stalls > 0) lines.push(`  • ${stalls} standard stall(s) @ $${rates.stalls} = $${stalls * rates.stalls}`);
+    if (hc_stalls > 0) lines.push(`  • ${hc_stalls} handicap stall(s) @ $${rates.hc_stalls} = $${hc_stalls * rates.hc_stalls}`);
+    if (hc_symbol > 0) lines.push(`  • ${hc_symbol} handicap symbol(s) @ $${rates.hc_symbol} = $${hc_symbol * rates.hc_symbol}`);
+    if (arrows > 0) lines.push(`  • ${arrows} directional arrow(s) @ $${rates.arrows} = $${arrows * rates.arrows}`);
+    if (stop > 0) lines.push(`  • ${stop} stop bar(s) @ $${rates.stop} = $${stop * rates.stop}`);
+    if (fire > 0) lines.push(`  • ${fire} ft fire lane @ $${rates.fire}/ft = $${(fire * rates.fire).toFixed(2)}`);
+
+    const quoteText =
+`━━━━━━━━━━━━━━━━━━━━━━━
+STRIPE STL — PARKING LOT QUOTE
+━━━━━━━━━━━━━━━━━━━━━━━
+Date: ${today}
+
+Prepared for: ${bizName}${contactName ? '\nContact: ' + contactName : ''}${address ? '\nAddress: ' + address : ''}${contactInfo ? '\nPhone/Email: ' + contactInfo : ''}
+
+SCOPE OF WORK:
+${lines.join('\n')}
+${notes ? '\nNotes: ' + notes : ''}
+
+━━━━━━━━━━━━━━━━━━━━━━━
+TOTAL: $${total.toFixed(2)}
+50% Deposit to Schedule: $${deposit.toFixed(2)}
+Balance Due at Completion: $${deposit.toFixed(2)}
+━━━━━━━━━━━━━━━━━━━━━━━
+
+Terms:
+• Quote valid for 30 days
+• Work completed within 5 business days of deposit
+• Weather-dependent scheduling
+
+Questions? Call or text:
+📞 (636) 285-8254
+📧 stripestlouis@gmail.com
+🌐 stripestlouis.github.io
+
+Thanks for your business!
+— TJ | Stripe STL`;
+
+    document.getElementById('quoteOutput').style.display = 'block';
+    document.getElementById('quoteOutput').textContent = quoteText;
+    document.getElementById('copyBtn').style.display = 'block';
+    document.getElementById('quoteOutput').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function copyQuote() {
+    const text = document.getElementById('quoteOutput').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      document.getElementById('copyBtn').textContent = '✅ Copied!';
+      setTimeout(() => document.getElementById('copyBtn').textContent = '📋 Copy to Clipboard', 2000);
+    });
+  }
+
+  function resetForm() {
+    document.querySelectorAll('input[type=number]').forEach(i => i.value = 0);
+    document.querySelectorAll('input[type=text], textarea').forEach(i => i.value = '');
+    document.getElementById('quoteOutput').style.display = 'none';
+    document.getElementById('copyBtn').style.display = 'none';
+    calc();
+  }
+
+  calc();
+</script>
+
+</body>
+</html>
