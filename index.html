@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stripe STL | Parking Lot Line Striping – St. Louis, MO</title>
+  <meta name="description" content="Professional parking lot line striping in St. Louis, MO. Fast turnaround, competitive pricing, free quotes. Call Stripe STL today."/>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; color: #1a1a1a; background: #fff; }
+
+    /* NAV */
+    nav {
+      background: #1a1a1a;
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo { color: #FFD700; font-size: 1.6rem; font-weight: 900; letter-spacing: 1px; }
+    .logo span { color: #fff; }
+    nav a { color: #ccc; text-decoration: none; margin-left: 24px; font-size: 0.95rem; }
+    nav a:hover { color: #FFD700; }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+      color: white;
+      padding: 80px 32px;
+      text-align: center;
+    }
+    .hero h1 { font-size: 2.8rem; font-weight: 900; line-height: 1.2; margin-bottom: 16px; }
+    .hero h1 span { color: #FFD700; }
+    .hero p { font-size: 1.2rem; color: #ccc; max-width: 560px; margin: 0 auto 32px; }
+    .btn {
+      display: inline-block;
+      background: #FFD700;
+      color: #1a1a1a;
+      padding: 16px 36px;
+      border-radius: 4px;
+      font-weight: 800;
+      font-size: 1.1rem;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn:hover { background: #e6c200; }
+
+    /* TRUST BAR */
+    .trust {
+      background: #FFD700;
+      padding: 16px 32px;
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    .trust-item { font-weight: 800; font-size: 0.95rem; color: #1a1a1a; }
+
+    /* SERVICES */
+    .section { padding: 64px 32px; max-width: 960px; margin: 0 auto; }
+    .section h2 { font-size: 2rem; font-weight: 900; margin-bottom: 8px; }
+    .section .sub { color: #666; margin-bottom: 40px; font-size: 1rem; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
+    .card {
+      border: 2px solid #f0f0f0;
+      border-radius: 8px;
+      padding: 28px 24px;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: #FFD700; }
+    .card .icon { font-size: 2rem; margin-bottom: 12px; }
+    .card h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 8px; }
+    .card p { color: #555; font-size: 0.9rem; line-height: 1.6; }
+
+    /* WHY */
+    .why { background: #f9f9f9; padding: 64px 32px; }
+    .why-inner { max-width: 960px; margin: 0 auto; }
+    .why h2 { font-size: 2rem; font-weight: 900; margin-bottom: 8px; }
+    .why .sub { color: #666; margin-bottom: 40px; }
+    .reasons { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; }
+    .reason { text-align: center; padding: 24px; }
+    .reason .num { font-size: 2.5rem; font-weight: 900; color: #FFD700; margin-bottom: 8px; }
+    .reason h4 { font-weight: 800; margin-bottom: 6px; }
+    .reason p { color: #666; font-size: 0.9rem; }
+
+    /* CTA */
+    .cta {
+      background: #1a1a1a;
+      color: white;
+      padding: 64px 32px;
+      text-align: center;
+    }
+    .cta h2 { font-size: 2rem; font-weight: 900; margin-bottom: 12px; }
+    .cta p { color: #aaa; margin-bottom: 32px; font-size: 1rem; }
+
+    /* FOOTER */
+    footer {
+      background: #111;
+      color: #666;
+      text-align: center;
+      padding: 24px;
+      font-size: 0.85rem;
+    }
+    footer span { color: #FFD700; font-weight: 700; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">STRIPE<span>STL</span></div>
+    <div>
+      <a href="#services">Services</a>
+      <a href="#why">Why Us</a>
+      <a href="#contact">Free Quote</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <h1>St. Louis Parking Lot<br/><span>Line Striping Done Right</span></h1>
+    <p>Fast, professional, and affordable. We keep your lot safe, clean, and compliant — without the hassle.</p>
+    <a href="#contact" class="btn">Get a Free Quote →</a>
+  </section>
+
+  <div class="trust">
+    <div class="trust-item">✅ Free Quotes</div>
+    <div class="trust-item">⚡ Same-Week Service</div>
+    <div class="trust-item">📍 St. Louis Local</div>
+    <div class="trust-item">💰 Competitive Pricing</div>
+  </div>
+
+  <section class="section" id="services">
+    <h2>What We Do</h2>
+    <p class="sub">Everything your parking lot needs to look sharp and stay compliant.</p>
+    <div class="cards">
+      <div class="card">
+        <div class="icon">🅿️</div>
+        <h3>Parking Stall Striping</h3>
+        <p>Fresh, crisp lines that maximize your lot's capacity and keep traffic flowing smoothly.</p>
+      </div>
+      <div class="card">
+        <div class="icon">♿</div>
+        <h3>ADA Handicap Markings</h3>
+        <p>Compliant handicap stalls and symbols to keep your property up to code and avoid fines.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🔄</div>
+        <h3>Re-Striping & Refresh</h3>
+        <p>Faded lines are a liability. We'll restore your existing layout quickly and affordably.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🚒</div>
+        <h3>Fire Lanes & Curb Marking</h3>
+        <p>Required by code. We paint fire lanes, no-parking zones, and curbs to keep you compliant.</p>
+      </div>
+      <div class="card">
+        <div class="icon">➡️</div>
+        <h3>Directional Arrows & Symbols</h3>
+        <p>Stop bars, arrows, reserved spots — we handle all the detail work that makes a lot professional.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🏢</div>
+        <h3>Commercial & Multi-Use</h3>
+        <p>Strip malls, office buildings, churches, restaurants — if it has a parking lot, we stripe it.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="why" id="why">
+    <div class="why-inner">
+      <h2>Why Stripe STL?</h2>
+      <p class="sub">We're not a national chain. We're your St. Louis neighbors.</p>
+      <div class="reasons">
+        <div class="reason">
+          <div class="num">01</div>
+          <h4>Local & Reliable</h4>
+          <p>St. Louis based, St. Louis focused. We show up when we say we will.</p>
+        </div>
+        <div class="reason">
+          <div class="num">02</div>
+          <h4>Same-Week Turnaround</h4>
+          <p>No waiting weeks. Most jobs are completed within days of booking.</p>
+        </div>
+        <div class="reason">
+          <div class="num">03</div>
+          <h4>Transparent Pricing</h4>
+          <p>Free quotes, no hidden fees. You know exactly what you're paying before we start.</p>
+        </div>
+        <div class="reason">
+          <div class="num">04</div>
+          <h4>Liability Protection</h4>
+          <p>Faded or missing markings expose you to lawsuits. We keep your property protected.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="cta" id="contact">
+    <h2>Ready for a Free Quote?</h2>
+    <p>Call or text us anytime. We'll measure your lot and get you a number fast — no pressure, no obligation.</p>
+    <a href="tel:+16362858254" class="btn">📞 Call or Text: (636) 285-8254</a>
+  </section>
+
+  <footer>
+    <p>© 2026 <span>Stripe STL</span> — St. Louis, Missouri. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
