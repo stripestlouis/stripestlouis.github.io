@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stripe STL — TJ Delaney</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #111;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .card {
+      background: #1a1a1a;
+      border-radius: 16px;
+      padding: 36px 32px;
+      max-width: 380px;
+      width: 100%;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+      border: 1px solid #2a2a2a;
+      text-align: center;
+    }
+
+    .logo {
+      font-size: 2.4rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: #FFD700;
+      margin-bottom: 4px;
+    }
+    .logo span { color: #fff; }
+
+    .tagline {
+      color: #777;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    .divider {
+      width: 40px;
+      height: 3px;
+      background: #FFD700;
+      margin: 0 auto 28px;
+      border-radius: 2px;
+    }
+
+    .name {
+      color: #fff;
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+    .title {
+      color: #888;
+      font-size: 0.85rem;
+      margin-bottom: 28px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .contact-item a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+    .contact-item a:hover { color: #FFD700; }
+    .contact-item .icon { font-size: 1.1rem; }
+
+    .cta {
+      margin-top: 28px;
+      background: #FFD700;
+      color: #1a1a1a;
+      padding: 14px 24px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 1rem;
+      text-decoration: none;
+      display: block;
+      transition: opacity 0.2s;
+    }
+    .cta:hover { opacity: 0.9; }
+
+    .quote-btn {
+      display: block;
+      margin-top: 10px;
+      padding: 14px 24px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 1rem;
+      text-decoration: none;
+      background: transparent;
+      border: 2px solid #333;
+      color: #888;
+      transition: all 0.2s;
+    }
+    .quote-btn:hover { border-color: #FFD700; color: #FFD700; }
+
+    .footer {
+      margin-top: 24px;
+      color: #444;
+      font-size: 0.75rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">STRIPE<span>STL</span></div>
+    <div class="tagline">Parking Lot Line Striping</div>
+    <div class="divider"></div>
+
+    <div class="name">TJ Delaney</div>
+    <div class="title">Owner</div>
+
+    <div class="contact-item">
+      <span class="icon">📞</span>
+      <a href="tel:+16362858254">(636) 285-8254</a>
+    </div>
+    <div class="contact-item">
+      <span class="icon">📧</span>
+      <a href="mailto:stripestlouis@gmail.com">stripestlouis@gmail.com</a>
+    </div>
+    <div class="contact-item">
+      <span class="icon">🌐</span>
+      <a href="https://stripestlouis.github.io" target="_blank">stripestlouis.github.io</a>
+    </div>
+
+    <a href="tel:+16362858254" class="cta">📞 Call or Text for a Free Quote</a>
+    <a href="https://stripestlouis.github.io/quote.html" class="quote-btn">📋 Get an Instant Quote</a>
+
+    <div class="footer">St. Louis, MO · Same-Week Service · Free Quotes</div>
+  </div>
+</body>
+</html>
