@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stripe STL — Follow-Up Templates</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f4f4f4; color: #1a1a1a; }
+    header {
+      background: #1a1a1a;
+      color: #FFD700;
+      padding: 16px 20px;
+      font-size: 1.3rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header span { color: #fff; }
+    header a { color: #555; font-size: 0.8rem; text-decoration: none; }
+
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+
+    .rule {
+      background: #FFD700;
+      color: #1a1a1a;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .template {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .template-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .template-title {
+      font-weight: 900;
+      font-size: 1rem;
+      color: #1a1a1a;
+    }
+    .template-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+    }
+    .tag-hot { background: #fff3cd; color: #856404; }
+    .tag-warm { background: #d1ecf1; color: #0c5460; }
+    .tag-cold { background: #f8d7da; color: #721c24; }
+    .tag-follow { background: #e2e3e5; color: #383d41; }
+
+    .template-body {
+      background: #f9f9f9;
+      border-radius: 6px;
+      padding: 14px;
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: #333;
+      white-space: pre-wrap;
+      margin-bottom: 12px;
+    }
+
+    .copy-btn {
+      width: 100%;
+      padding: 12px;
+      background: #1a1a1a;
+      color: #FFD700;
+      border: none;
+      border-radius: 6px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .copy-btn:hover { opacity: 0.85; }
+    .copy-btn.copied { background: #28a745; color: white; }
+  </style>
+</head>
+<body>
+
+<header>
+  STRIPE<span>STL</span> — Templates
+  <a href="/">← Back</a>
+</header>
+
+<div class="container">
+
+  <div class="rule">⚡ Golden Rule: Text within 1 hour of leaving</div>
+
+  <!-- TEMPLATE 1 -->
+  <div class="template">
+    <div class="template-header">
+      <div class="template-title">🔥 Warm Lead</div>
+      <div class="template-tag tag-hot">They said YES</div>
+    </div>
+    <div class="template-body" id="t1">Hey [Name], it's TJ from Stripe STL — great meeting you today! Here's the quote for your lot:
+
+[PASTE QUOTE FROM QUOTE TOOL]
+
+To get on the schedule I just need 50% upfront — that's $[AMOUNT]. I can have your lot done this week.
+
+Want to move forward? Reply here or call/text me at (636) 285-8254.</div>
+    <button class="copy-btn" onclick="copyTemplate('t1', this)">📋 Copy Template</button>
+  </div>
+
+  <!-- TEMPLATE 2 -->
+  <div class="template">
+    <div class="template-header">
+      <div class="template-title">💬 Cool Lead</div>
+      <div class="template-tag tag-warm">They said MAYBE</div>
+    </div>
+    <div class="template-body" id="t2">Hey [Name], TJ from Stripe STL here — stopped by [Business Name] earlier about your parking lot.
+
+Just wanted to follow up like I said I would. Here's our info:
+📞 (636) 285-8254
+🌐 stripestlouis.github.io
+
+Happy to come back out and give you a free quote anytime — no obligation. Just reply or call when you're ready.</div>
+    <button class="copy-btn" onclick="copyTemplate('t2', this)">📋 Copy Template</button>
+  </div>
+
+  <!-- TEMPLATE 3 -->
+  <div class="template">
+    <div class="template-header">
+      <div class="template-title">🚪 Left a Card</div>
+      <div class="template-tag tag-cold">They WEREN'T THERE</div>
+    </div>
+    <div class="template-body" id="t3">Hi [Name], this is TJ with Stripe STL — I stopped by [Business Name] today and left my card. We do parking lot line striping here in St. Louis, same-week service, free quotes.
+
+Noticed your lot could use a refresh — happy to come measure it and get you a number. No pressure at all.
+
+Reach me anytime at (636) 285-8254 or check us out at stripestlouis.github.io</div>
+    <button class="copy-btn" onclick="copyTemplate('t3', this)">📋 Copy Template</button>
+  </div>
+
+  <!-- TEMPLATE 4 -->
+  <div class="template">
+    <div class="template-header">
+      <div class="template-title">🔔 No Response</div>
+      <div class="template-tag tag-follow">2-3 DAYS LATER</div>
+    </div>
+    <div class="template-body" id="t4">Hey [Name], just checking back in — TJ from Stripe STL. Wanted to make sure my quote/message didn't get lost.
+
+Still happy to get your lot looking sharp — just let me know if the timing works.
+
+(636) 285-8254</div>
+    <button class="copy-btn" onclick="copyTemplate('t4', this)">📋 Copy Template</button>
+  </div>
+
+</div>
+
+<script>
+  function copyTemplate(id, btn) {
+    const text = document.getElementById(id).textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = '✅ Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = '📋 Copy Template';
+        btn.classList.remove('copied');
+      }, 2000);
+    });
+  }
+</script>
+
+</body>
+</html>
